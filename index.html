@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movie Search App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="src/js/tailwind.js"></script>
+  <link rel="stylesheet" href="src/css/style.css">
+  <meta name="description" content="Search Movie — Situs pencarian informasi film dan movie terbaru. Temukan sinopsis, rating, pemeran, dan detail film favoritmu dengan cepat dan mudah.">
+<meta name="keywords" content="Search Movie, Pencarian Film, Info Movie, Sinopsis Film, Rating Film, Movie Database, Film Terbaru, Cari Film">
+<meta name="author" content="Hannaaffiii">
+
+<link rel="apple-touch-icon" sizes="180x180" href="src/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="src/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="src/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#2563EB">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://semovie.netlify.app/">
+<meta property="og:title" content="Search Movie | Pencarian Informasi Film">
+<meta property="og:description" content="Search Movie — Temukan sinopsis, rating, pemeran, dan detail film favoritmu secara cepat dan mudah.">
+<meta property="og:image" content="https://semovie.netlify.app/src/apple-touch-icon.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://semovie.netlify.app/">
+<meta name="twitter:title" content="Search Movie | Pencarian Informasi Film">
+<meta name="twitter:description" content="Search Movie — Temukan sinopsis, rating, pemeran, dan detail film favoritmu secara cepat dan mudah.">
+<meta name="twitter:image" content="https://semovie.netlify.app/src/apple-touch-icon.png">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
+  <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <h1 class="text-3xl font-bold gradient-text">Movie<span class="text-gray-800 dark:text-gray-200">Search</span></h1>
+        <button id="darkToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+          <i class="fas fa-moon dark:hidden"></i>
+          <i class="fas fa-sun hidden dark:block"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <div class="flex flex-col items-center mb-8">
+      <form id="searchForm" class="flex items-center w-full max-w-2xl">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-search text-gray-400"></i>
+          </div>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Cari film favoritmu..." 
+            autocomplete="off"
+            class="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+          >
+        </div>
+        <button 
+          type="submit" 
+          id="searchBtn"
+          class="ml-3 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-full hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg"
+        >
+          Cari
+        </button>
+      </form>
+      
+      <div id="searchInfo" class="mt-4 text-gray-600 dark:text-gray-400 hidden">
+        Menampilkan hasil untuk: <span id="queryText" class="font-semibold"></span>
+      </div>
+    </div>
+      
+    <div id="results" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    
+    <div id="loading" class="hidden flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-500"></div>
+    </div>
+    
+    <div id="pagination" class="flex justify-center mt-8 space-x-2"></div>
+    
+    <div id="emptyState" class="text-center py-16">
+      <div class="mx-auto w-32 h-32 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mb-6">
+        <i class="fas fa-film text-5xl text-gray-400"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Selamat datang di MovieSearch</h3>
+      <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">Cari film favoritmu dengan mengetik judul di kolom pencarian di atas</p>
+    </div>
+    
+    <div id="errorState" class="hidden text-center py-16">
+      <div class="mx-auto w-32 h-32 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-6">
+        <i class="fas fa-exclamation-triangle text-5xl text-red-500"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2" id="errorTitle">Terjadi Kesalahan</h3>
+      <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto" id="errorMessage">Silakan coba lagi nanti</p>
+    </div>
+  </main>
+
+  <!-- Detail Film -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
+    <div id="modalContent" class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto scrollbar-hide animate-slide-up">
+      <div class="relative">
+        <button id="modalClose" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center justify-center transition-colors duration-200">
+          <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="p-6">
+          <!-- Content -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-6 py-3 rounded-lg shadow-lg bg-gray-800 text-white font-medium animate-fade-in"></div>
+
+  <footer class="bg-gray-900 text-white py-4 text-center">
+    Created by <a href="https://hannaaffii.netlify.app" class="underline hover:text-gray-300">hannaaffiii</a>
+  </footer>
+
+  <script src="src/js/script.js"></script>
+</body>
+</html>

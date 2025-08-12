@@ -1,0 +1,22 @@
+{
+  "name": "Search Movie",
+  "short_name": "SeMovie",
+  "description": "Search Movie — Situs pencarian informasi film dan movie terbaru. Temukan sinopsis, rating, pemeran, dan detail film favoritmu dengan cepat dan mudah.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "src//android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "src/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
