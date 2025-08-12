@@ -47,8 +47,7 @@ src/
 └── js/
 ├── script.js
 └── tailwind.js
-
-````
+```
 
 ---
 
@@ -65,7 +64,7 @@ src/
 1. Clone repository:
    ```
    git clone https://github.com/frhndevweb/semovie.git
-````
+   ```
 
 2. Masuk ke folder proyek:
 
@@ -76,7 +75,7 @@ src/
 4. Atur API Key TMDB di file `src/js/script.js`:
 
    ```
-   const API_KEY = "6e230618e2508a2c144e4750c97a8809"; // free apikey, tinggal pake aja (kalo mau)
+   const API_KEY = "6e230618e2508a2c144e4750c97a8809"; free apikey, tinggal pake aja (kalo mau)
    ```
 
 ---
