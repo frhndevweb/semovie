@@ -1,8 +1,7 @@
-```
 # 🎬 SeMovie — Search Movie/Film
 
 <p align="center">
-  <img src="src/apple-touch-icon.png" alt="SeMovie Logo" width="120">
+  <img src="apple-touch-icon.png" alt="SeMovie Logo" width="120">
 </p>
 
 <p align="center">
@@ -84,7 +83,7 @@ src/
 
 ## 🖼️ Preview
 
-![Preview Website](src/IMG_20250812_201830.jpg)
+![Preview Website](IMG_20250812_201830.jpg)
 
 ---
 
@@ -94,5 +93,6 @@ Proyek ini dilisensikan di bawah **MIT License**.
 Lihat [LICENSE](LICENSE) untuk detail.
 
 ---
+
 
 <p align="center">Made with ❤️ by <a href="https://hannaaffii.netlify.app">hannaaffiii</a></p>
